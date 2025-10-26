@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { FiEdit2, FiTrash2, FiCheck, FiX, FiSave } from 'react-icons/fi';
-import './TodoItem.css';
+import { FiEdit2, FiTrash2, FiCheck, FiX, FiSave, FiClock, FiCalendar } from 'react-icons/fi';
 
 const TodoItem = ({ todo, onToggle, onUpdate, onDelete, isLoading }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -102,103 +101,170 @@ const TodoItem = ({ todo, onToggle, onUpdate, onDelete, isLoading }) => {
   };
 
   return (
-    <div className={`todo-item ${todo.completed ? 'completed' : 'pending'} ${isLoading ? 'loading' : ''}`}>
+    <div className={`glass-card group transition-all duration-300 hover:scale-[1.02] ${
+      todo.completed ? 'todo-complete bg-gradient-to-br from-green-400/20 to-emerald-500/20 border-green-400/30' : 
+      'bg-gradient-to-br from-blue-400/10 to-purple-500/10 border-blue-400/20'
+    } ${isLoading ? 'opacity-60 pointer-events-none' : ''}`}>
+      
       {isEditing ? (
-        <div className="edit-mode">
-          <div className="edit-form">
-            <div className="form-group">
+        // Edit Mode
+        <div className="space-y-4 animate-fade-in">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+            <h4 className="text-white font-semibold">Editing Todo</h4>
+          </div>
+          
+          <div className="space-y-4">
+            <div>
               <input
                 name="title"
                 type="text"
                 value={editData.title}
                 onChange={handleChange}
                 placeholder="Todo title..."
-                className={errors.title ? 'error' : ''}
+                className={`glass-input w-full ${
+                  errors.title 
+                    ? 'border-red-400/50 bg-red-50/10 focus:ring-red-400/50' 
+                    : 'border-white/30'
+                }`}
                 maxLength={255}
               />
-              {errors.title && <span className="error-message">{errors.title}</span>}
+              {errors.title && (
+                <p className="text-red-300 text-xs mt-1 flex items-center gap-1">
+                  <span className="w-1 h-1 bg-red-400 rounded-full"></span>
+                  {errors.title}
+                </p>
+              )}
             </div>
             
-            <div className="form-group">
+            <div>
               <textarea
                 name="description"
                 value={editData.description}
                 onChange={handleChange}
                 placeholder="Description (optional)..."
                 rows={2}
-                className={errors.description ? 'error' : ''}
+                className={`glass-input w-full resize-none ${
+                  errors.description 
+                    ? 'border-red-400/50 bg-red-50/10 focus:ring-red-400/50' 
+                    : 'border-white/30'
+                }`}
                 maxLength={1000}
               />
-              {errors.description && <span className="error-message">{errors.description}</span>}
+              {errors.description && (
+                <p className="text-red-300 text-xs mt-1 flex items-center gap-1">
+                  <span className="w-1 h-1 bg-red-400 rounded-full"></span>
+                  {errors.description}
+                </p>
+              )}
             </div>
             
             {errors.submit && (
-              <div className="error-message submit-error">{errors.submit}</div>
+              <div className="glass-light border-red-400/30 bg-red-50/10 rounded-lg p-3">
+                <p className="text-red-300 text-sm">{errors.submit}</p>
+              </div>
             )}
           </div>
           
-          <div className="edit-actions">
+          <div className="flex gap-2 pt-2">
             <button 
               onClick={handleSave} 
-              className="save-btn"
               disabled={!editData.title.trim()}
+              className="glass-button flex-1 bg-green-500/30 hover:bg-green-500/40 text-white font-medium py-2 
+                         disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
-              <FiSave /> Save
+              <FiSave size={16} />
+              Save
             </button>
-            <button onClick={handleCancel} className="cancel-btn">
-              <FiX /> Cancel
+            <button 
+              onClick={handleCancel}
+              className="glass-button flex-1 bg-gray-500/30 hover:bg-gray-500/40 text-white font-medium py-2 
+                         flex items-center justify-center gap-2"
+            >
+              <FiX size={16} />
+              Cancel
             </button>
           </div>
         </div>
       ) : (
-        <div className="view-mode">
-          <div className="todo-content">
-            <div className="todo-main">
-              <button 
-                onClick={handleToggle}
-                className={`toggle-btn ${todo.completed ? 'completed' : ''}`}
-                disabled={isLoading}
-              >
-                {todo.completed && <FiCheck />}
-              </button>
+        // View Mode
+        <div className="animate-fade-in">
+          <div className="flex items-start gap-4">
+            {/* Toggle Button */}
+            <button 
+              onClick={handleToggle}
+              disabled={isLoading}
+              className={`mt-1 w-6 h-6 rounded-lg border-2 flex items-center justify-center transition-all duration-200 
+                         hover:scale-110 focus-ring ${
+                todo.completed 
+                  ? 'bg-green-500 border-green-400 text-white shadow-glow' 
+                  : 'border-white/40 hover:border-green-400/60 hover:bg-green-500/20'
+              } ${isLoading ? 'animate-pulse' : ''}`}
+            >
+              {todo.completed && <FiCheck size={14} className="drop-shadow-sm" />}
+            </button>
+            
+            {/* Content */}
+            <div className="flex-1 min-w-0">
+              <h3 className={`font-semibold text-lg mb-2 transition-all duration-200 ${
+                todo.completed 
+                  ? 'text-white/70 line-through' 
+                  : 'text-white group-hover:text-white/90'
+              }`}>
+                {todo.title}
+              </h3>
               
-              <div className="todo-text">
-                <h3 className="todo-title">{todo.title}</h3>
-                {todo.description && (
-                  <p className="todo-description">{todo.description}</p>
+              {todo.description && (
+                <p className={`text-sm mb-3 leading-relaxed ${
+                  todo.completed ? 'text-white/50' : 'text-white/70'
+                }`}>
+                  {todo.description}
+                </p>
+              )}
+              
+              <div className="flex flex-wrap items-center gap-3 text-xs">
+                <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-full font-medium ${
+                  todo.completed 
+                    ? 'bg-green-500/20 text-green-200 border border-green-400/30' 
+                    : 'bg-yellow-500/20 text-yellow-200 border border-yellow-400/30'
+                }`}>
+                  {todo.completed ? <FiCheck size={10} /> : <FiClock size={10} />}
+                  {todo.completed ? 'Completed' : 'Pending'}
+                </span>
+                
+                <span className="inline-flex items-center gap-1 text-white/50">
+                  <FiCalendar size={10} />
+                  {formatDate(todo.created_at)}
+                </span>
+                
+                {todo.updated_at !== todo.created_at && (
+                  <span className="inline-flex items-center gap-1 text-white/50">
+                    <span className="w-1 h-1 bg-white/30 rounded-full"></span>
+                    Updated {formatDate(todo.updated_at)}
+                  </span>
                 )}
-                <div className="todo-meta">
-                  <span className="todo-status">
-                    Status: <strong>{todo.completed ? 'Completed' : 'Pending'}</strong>
-                  </span>
-                  <span className="todo-date">
-                    Created: {formatDate(todo.created_at)}
-                  </span>
-                  {todo.updated_at !== todo.created_at && (
-                    <span className="todo-date">
-                      Updated: {formatDate(todo.updated_at)}
-                    </span>
-                  )}
-                </div>
               </div>
             </div>
             
-            <div className="todo-actions">
+            {/* Action Buttons */}
+            <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
               <button 
                 onClick={handleEdit}
-                className="edit-btn"
                 disabled={isLoading}
+                className="glass-button p-2 bg-blue-500/20 hover:bg-blue-500/30 text-blue-200 
+                           hover:text-white transition-all duration-200 hover:scale-110 focus-ring"
                 title="Edit todo"
               >
-                <FiEdit2 />
+                <FiEdit2 size={14} />
               </button>
               <button 
                 onClick={handleDelete}
-                className="delete-btn"
                 disabled={isLoading}
+                className="glass-button p-2 bg-red-500/20 hover:bg-red-500/30 text-red-200 
+                           hover:text-white transition-all duration-200 hover:scale-110 focus-ring"
                 title="Delete todo"
               >
-                <FiTrash2 />
+                <FiTrash2 size={14} />
               </button>
             </div>
           </div>
