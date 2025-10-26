@@ -63,20 +63,20 @@ const TodoForm = ({ onAddTodo, isLoading }) => {
   };
 
   return (
-    <div className="glass-card animate-slide-up">
+    <div className="card p-6">
       <div className="mb-6">
-        <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
-          <div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full"></div>
+        <h3 className="text-xl font-bold text-gray-800 mb-2 flex items-center gap-2">
+          <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
           Add New Todo
         </h3>
-        <p className="text-white/70 text-sm">Create a new task to stay organized</p>
+        <p className="text-gray-600 text-sm">Create a new task to stay organized</p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="space-y-2">
           <label 
             htmlFor="title" 
-            className="block text-sm font-semibold text-white/90"
+            className="block text-sm font-semibold text-gray-700"
           >
             Todo Title *
           </label>
@@ -87,17 +87,17 @@ const TodoForm = ({ onAddTodo, isLoading }) => {
             value={formData.title}
             onChange={handleChange}
             placeholder="Enter your todo title..."
-            className={`glass-input w-full ${
+            className={`input-field ${
               errors.title 
-                ? 'border-red-400/50 bg-red-50/10 focus:ring-red-400/50' 
-                : 'border-white/30 focus:border-blue-400/50'
+                ? 'border-red-300 focus:ring-red-500 focus:border-red-500' 
+                : ''
             }`}
             disabled={isLoading}
             maxLength={255}
           />
           {errors.title && (
-            <p className="text-red-300 text-xs mt-1 flex items-center gap-1">
-              <span className="w-1 h-1 bg-red-400 rounded-full"></span>
+            <p className="text-red-600 text-xs mt-1 flex items-center gap-1">
+              <span className="w-1 h-1 bg-red-500 rounded-full"></span>
               {errors.title}
             </p>
           )}
@@ -106,7 +106,7 @@ const TodoForm = ({ onAddTodo, isLoading }) => {
         <div className="space-y-2">
           <label 
             htmlFor="description" 
-            className="block text-sm font-semibold text-white/90"
+            className="block text-sm font-semibold text-gray-700"
           >
             Description (Optional)
           </label>
@@ -117,31 +117,31 @@ const TodoForm = ({ onAddTodo, isLoading }) => {
             onChange={handleChange}
             placeholder="Add more details about your todo..."
             rows={3}
-            className={`glass-input w-full resize-none ${
+            className={`input-field resize-none ${
               errors.description 
-                ? 'border-red-400/50 bg-red-50/10 focus:ring-red-400/50' 
-                : 'border-white/30 focus:border-blue-400/50'
+                ? 'border-red-300 focus:ring-red-500 focus:border-red-500' 
+                : ''
             }`}
             disabled={isLoading}
             maxLength={1000}
           />
           {errors.description && (
-            <p className="text-red-300 text-xs mt-1 flex items-center gap-1">
-              <span className="w-1 h-1 bg-red-400 rounded-full"></span>
+            <p className="text-red-600 text-xs mt-1 flex items-center gap-1">
+              <span className="w-1 h-1 bg-red-500 rounded-full"></span>
               {errors.description}
             </p>
           )}
           <div className="flex justify-between items-center">
-            <small className="text-white/50 text-xs">
+            <small className="text-gray-500 text-xs">
               {formData.description.length}/1000 characters
             </small>
           </div>
         </div>
 
         {errors.submit && (
-          <div className="glass-light border-red-400/30 bg-red-50/10 rounded-lg p-3">
-            <p className="text-red-300 text-sm flex items-center gap-2">
-              <span className="w-2 h-2 bg-red-400 rounded-full"></span>
+          <div className="bg-red-50 border border-red-200 rounded-lg p-3">
+            <p className="text-red-600 text-sm flex items-center gap-2">
+              <span className="w-2 h-2 bg-red-500 rounded-full"></span>
               {errors.submit}
             </p>
           </div>
@@ -150,11 +150,11 @@ const TodoForm = ({ onAddTodo, isLoading }) => {
         <button 
           type="submit" 
           disabled={isLoading || !formData.title.trim()}
-          className={`glass-button w-full flex items-center justify-center gap-3 py-4 text-white font-semibold
+          className={`w-full flex items-center justify-center gap-3 py-3 px-4 rounded-lg font-semibold transition-colors duration-200
             ${isLoading || !formData.title.trim() 
-              ? 'opacity-50 cursor-not-allowed bg-gray-500/20' 
-              : 'bg-gradient-to-r from-blue-500/30 to-purple-600/30 hover:from-blue-500/40 hover:to-purple-600/40 hover:shadow-glow'
-            } transition-all duration-300`}
+              ? 'bg-gray-400 cursor-not-allowed text-white' 
+              : 'btn-primary'
+            }`}
         >
           {isLoading ? (
             <>
