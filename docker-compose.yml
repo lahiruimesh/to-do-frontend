@@ -2,9 +2,7 @@
 services:
   # Frontend React App
   frontend:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: lahiruimesh/todomasterfrontend:v1.0.0
     container_name: todo-frontend
     environment:
       REACT_APP_API_URL: http://localhost:5000/api
@@ -16,5 +14,5 @@ services:
 
 networks:
   todo-network:
-    driver: bridge
     external: true
+    name: backend_todo-network

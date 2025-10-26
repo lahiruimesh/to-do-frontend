@@ -12,7 +12,7 @@ function App() {
   const [isConnected, setIsConnected] = useState(false);
   const [showWelcome, setShowWelcome] = useState(true);
 
-  // Load pending todos from API (only show last 5 pending tasks)
+  
   const loadTodos = useCallback(async (showLoading = true) => {
     try {
       if (showLoading) setIsLoading(true);
