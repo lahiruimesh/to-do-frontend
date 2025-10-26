@@ -101,9 +101,18 @@ const TodoItem = ({ todo, onToggle, onUpdate, onDelete, isLoading }) => {
   };
 
   return (
-    <div className={`card group transition-all duration-200 ${
-      todo.completed ? 'bg-green-50 border-green-200' : 'bg-white border-gray-200'
-    } ${isLoading ? 'opacity-60 pointer-events-none' : ''}`}>
+    <div className={`relative group overflow-hidden bg-gradient-to-br from-white to-gray-50/30 
+                    rounded-xl border border-gray-200/70 shadow-sm backdrop-blur-sm
+                    transition-all duration-300 ease-out hover:shadow-xl hover:shadow-blue-100/50 
+                    hover:-translate-y-1 hover:border-blue-300/50 hover:bg-gradient-to-br hover:from-blue-50/30 hover:to-white
+                    ${isLoading ? 'opacity-60 pointer-events-none' : ''}
+                    ${isEditing ? 'ring-2 ring-blue-400 shadow-lg shadow-blue-100/50' : ''}`}>
+      
+      {/* Decorative elements */}
+      <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-70"></div>
+      <div className="absolute -top-2 -right-2 w-20 h-20 bg-gradient-to-br from-blue-400/10 to-purple-400/10 rounded-full blur-xl group-hover:from-blue-400/20 group-hover:to-purple-400/20 transition-all duration-300"></div>
+      
+      <div className="relative p-6">
       
       {isEditing ? (
         // Edit Mode
@@ -187,59 +196,35 @@ const TodoItem = ({ todo, onToggle, onUpdate, onDelete, isLoading }) => {
           </div>
         </div>
       ) : (
-        // View Mode
+        // View Mode - Only showing pending tasks
         <div>
           <div className="flex items-start gap-4">
-            {/* Toggle Button */}
-            <button 
-              onClick={handleToggle}
-              disabled={isLoading}
-              className={`mt-1 w-6 h-6 rounded-lg border-2 flex items-center justify-center transition-all duration-200 
-                         focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
-                todo.completed 
-                  ? 'bg-green-500 border-green-500 text-white' 
-                  : 'border-gray-300 hover:border-green-500 hover:bg-green-50'
-              } ${isLoading ? 'animate-pulse' : ''}`}
-            >
-              {todo.completed && <FiCheck size={14} />}
-            </button>
-            
             {/* Content */}
             <div className="flex-1 min-w-0">
-              <h3 className={`font-semibold text-lg mb-2 transition-all duration-200 ${
-                todo.completed 
-                  ? 'text-gray-500 line-through' 
-                  : 'text-gray-800'
-              }`}>
+              <h3 className="font-bold text-xl mb-3 text-gray-800 group-hover:text-gray-900 transition-colors duration-200">
                 {todo.title}
               </h3>
               
               {todo.description && (
-                <p className={`text-sm mb-3 leading-relaxed ${
-                  todo.completed ? 'text-gray-500' : 'text-gray-600'
-                }`}>
+                <p className="text-sm mb-4 leading-relaxed text-gray-600 bg-gray-50/50 p-3 rounded-lg border-l-4 border-blue-200">
                   {todo.description}
                 </p>
               )}
               
               <div className="flex flex-wrap items-center gap-3 text-xs">
-                <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-full font-medium ${
-                  todo.completed 
-                    ? 'bg-green-100 text-green-700 border border-green-200' 
-                    : 'bg-orange-100 text-orange-700 border border-orange-200'
-                }`}>
-                  {todo.completed ? <FiCheck size={10} /> : <FiClock size={10} />}
-                  {todo.completed ? 'Completed' : 'Pending'}
+                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full font-medium bg-gradient-to-r from-orange-100 to-amber-100 text-orange-800 border border-orange-200/50 shadow-sm">
+                  <FiClock size={12} />
+                  Pending
                 </span>
                 
-                <span className="inline-flex items-center gap-1 text-gray-500">
-                  <FiCalendar size={10} />
+                <span className="inline-flex items-center gap-2 text-gray-500 bg-white/60 px-3 py-1.5 rounded-full border border-gray-200/50 shadow-sm">
+                  <FiCalendar size={12} />
                   {formatDate(todo.created_at)}
                 </span>
                 
                 {todo.updated_at !== todo.created_at && (
-                  <span className="inline-flex items-center gap-1 text-gray-500">
-                    <span className="w-1 h-1 bg-gray-400 rounded-full"></span>
+                  <span className="inline-flex items-center gap-2 text-gray-500 bg-white/60 px-3 py-1.5 rounded-full border border-gray-200/50 shadow-sm">
+                    <span className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse"></span>
                     Updated {formatDate(todo.updated_at)}
                   </span>
                 )}
@@ -247,29 +232,47 @@ const TodoItem = ({ todo, onToggle, onUpdate, onDelete, isLoading }) => {
             </div>
             
             {/* Action Buttons */}
-            <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+            <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-out">
               <button 
                 onClick={handleEdit}
                 disabled={isLoading}
-                className="p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg
-                           transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                title="Edit todo"
+                className="p-3 text-gray-600 hover:text-blue-600 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-100 
+                           rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400/50 
+                           transform hover:scale-105 shadow-sm hover:shadow-md"
+                title="Edit task"
               >
-                <FiEdit2 size={14} />
+                <FiEdit2 size={16} />
               </button>
+              
+              <button 
+                onClick={handleToggle}
+                disabled={isLoading}
+                className="px-4 py-2.5 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 
+                           text-white text-sm font-semibold rounded-xl shadow-lg hover:shadow-xl 
+                           transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-400/50
+                           disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 
+                           transform hover:scale-105 hover:-translate-y-0.5"
+                title="Mark as completed"
+              >
+                <FiCheck size={14} />
+                Done
+              </button>
+              
               <button 
                 onClick={handleDelete}
                 disabled={isLoading}
-                className="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg
-                           transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-500"
-                title="Delete todo"
+                className="p-3 text-gray-600 hover:text-red-600 hover:bg-gradient-to-r hover:from-red-50 hover:to-red-100 
+                           rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-400/50 
+                           transform hover:scale-105 shadow-sm hover:shadow-md"
+                title="Delete task"
               >
-                <FiTrash2 size={14} />
+                <FiTrash2 size={16} />
               </button>
             </div>
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 };

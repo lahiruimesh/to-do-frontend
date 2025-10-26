@@ -1,23 +1,24 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
+import WelcomePage from './components/WelcomePage';
 import { todoService } from './services/api';
 import { FiRefreshCw, FiServer, FiZap, FiHeart } from 'react-icons/fi';
 
 function App() {
   const [todos, setTodos] = useState([]);
-  const [filter, setFilter] = useState('all');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isConnected, setIsConnected] = useState(false);
+  const [showWelcome, setShowWelcome] = useState(true);
 
-  // Load todos from API
+  // Load pending todos from API (only show last 5 pending tasks)
   const loadTodos = useCallback(async (showLoading = true) => {
     try {
       if (showLoading) setIsLoading(true);
       setError(null);
       
-      const response = await todoService.getTodos();
+      const response = await todoService.getPendingTodos();
       setTodos(response.data || []);
       setIsConnected(true);
     } catch (err) {
@@ -62,7 +63,7 @@ function App() {
     }
   };
 
-  // Toggle todo completion
+  // Toggle todo completion - remove completed tasks from view
   const handleToggleTodo = async (id, completed) => {
     try {
       setIsLoading(true);
@@ -70,12 +71,17 @@ function App() {
       
       const response = await todoService.toggleTodo(id, completed);
       
-      // Update the todo in the list
-      setTodos(prevTodos =>
-        prevTodos.map(todo =>
-          todo.id === id ? response.data : todo
-        )
-      );
+      // If task is marked as completed, remove it from the list (don't display completed tasks)
+      if (response.data.completed) {
+        setTodos(prevTodos => prevTodos.filter(todo => todo.id !== id));
+      } else {
+        // If unmarking as completed (shouldn't happen with our UI, but just in case)
+        setTodos(prevTodos =>
+          prevTodos.map(todo =>
+            todo.id === id ? response.data : todo
+          )
+        );
+      }
     } catch (err) {
       console.error('Error toggling todo:', err);
       setError(err.message);
@@ -131,6 +137,16 @@ function App() {
   const handleRefresh = () => {
     loadTodos(true);
   };
+
+  // Handle welcome page completion
+  const handleWelcomeComplete = () => {
+    setShowWelcome(false);
+  };
+
+  // Show welcome page first
+  if (showWelcome) {
+    return <WelcomePage onComplete={handleWelcomeComplete} />;
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -204,15 +220,13 @@ function App() {
                 <div className="w-1 h-8 bg-green-500 rounded-full"></div>
                 My Tasks
               </h2>
-              <p className="text-gray-600">Manage your todo list efficiently</p>
+              <p className="text-gray-600">Your 5 most recent pending tasks</p>
             </div>
             <TodoList
               todos={todos}
               onToggleTodo={handleToggleTodo}
               onUpdateTodo={handleUpdateTodo}
               onDeleteTodo={handleDeleteTodo}
-              filter={filter}
-              onFilterChange={setFilter}
               isLoading={isLoading}
               error={error}
             />

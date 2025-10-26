@@ -45,6 +45,16 @@ export const todoService = {
     }
   },
 
+  // Get pending todos (last 5)
+  getPendingTodos: async () => {
+    try {
+      const response = await api.get('/todos/pending');
+      return response.data;
+    } catch (error) {
+      throw new Error(error.response?.data?.message || 'Failed to fetch pending todos');
+    }
+  },
+
   // Get todo by ID
   getTodoById: async (id) => {
     try {
