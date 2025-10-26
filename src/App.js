@@ -242,7 +242,6 @@ function App() {
           <div className="card text-center p-6">
             <p className="text-gray-600 flex items-center justify-center gap-2 flex-wrap">
               <span>Built with</span>
-              <FiHeart className="text-red-500" />
               <span>using React & Tailwind CSS</span>
               <span className="mx-2">|</span>
               <a 

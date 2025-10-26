@@ -2,14 +2,14 @@
 
 A modern, responsive React frontend for the TodoMaster task management application with glassmorphic UI design and Docker support.
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Prerequisites
 - Node.js 18+
 - npm or yarn
 - Docker (optional)
 
-## 📦 Installation & Setup
+##  Installation & Setup
 
 ### Local Development
 
@@ -31,7 +31,7 @@ npm start
 
 The application will be available at `http://localhost:3000`
 
-## 🐳 Docker Deployment
+##  Docker Deployment
 
 ### Using Docker Compose (Recommended)
 
@@ -90,31 +90,31 @@ docker run -d \
   lahiruimesh/todomasterfrontend:v1.0.0
 ```
 
-## 🎨 Features
+##  Features
 
 ### User Experience
-- ✨ **Welcome Page**: Animated welcome screen with 5-second auto-redirect
-- 🎨 **Modern UI**: Glassmorphic design with gradient backgrounds
-- 📱 **Responsive Design**: Works perfectly on all device sizes
-- 🖼️ **Branded Experience**: TodoMaster logo integration throughout
-- ⚡ **Fast Loading**: Optimized React builds with code splitting
+-  **Welcome Page**: Animated welcome screen with 5-second auto-redirect
+-  **Modern UI**: Glassmorphic design with gradient backgrounds
+-  **Responsive Design**: Works perfectly on all device sizes
+-  **Branded Experience**: TodoMaster logo integration throughout
+-  **Fast Loading**: Optimized React builds with code splitting
 
 ### Task Management
-- ➕ **Create Tasks**: Easy task creation with title and description
-- ✏️ **Edit Tasks**: In-place editing functionality
-- ✅ **Complete Tasks**: One-click "Done" button (no checkboxes)
-- 🗑️ **Delete Tasks**: Remove unwanted tasks
-- 📋 **Smart Display**: Shows only last 5 pending tasks
-- 🔄 **Auto-refresh**: Automatic updates every 30 seconds
+-  **Create Tasks**: Easy task creation with title and description
+-  **Edit Tasks**: In-place editing functionality
+-  **Complete Tasks**: One-click "Done" button (no checkboxes)
+-  **Delete Tasks**: Remove unwanted tasks
+-  **Smart Display**: Shows only last 5 pending tasks
+-  **Auto-refresh**: Automatic updates every 30 seconds
 
 ### Technical Features
-- 🏗️ **Component Architecture**: Modular React components
-- 🎭 **State Management**: React hooks for efficient state handling
-- 🌐 **API Integration**: Axios for backend communication
-- 🎯 **Error Handling**: Comprehensive error boundaries
-- 🔧 **Environment Config**: Configurable API endpoints
+-  **Component Architecture**: Modular React components
+-  **State Management**: React hooks for efficient state handling
+-  **API Integration**: Axios for backend communication
+-  **Error Handling**: Comprehensive error boundaries
+-  **Environment Config**: Configurable API endpoints
 
-## ⚙️ Configuration
+##  Configuration
 
 ### Environment Variables
 
@@ -128,7 +128,7 @@ docker run -d \
 REACT_APP_API_URL=http://localhost:5000/api
 ```
 
-## 🛠️ Available Scripts
+##  Available Scripts
 
 ### Development
 ```bash
@@ -162,7 +162,7 @@ npm run eject      # Eject from Create React App (not recommended)
 ./build.sh multi v1.0.0 https://api.example.com/api
 ```
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 src/
@@ -184,7 +184,7 @@ public/
 └── manifest.json          # PWA manifest
 ```
 
-## 🎨 UI Components
+##  UI Components
 
 ### WelcomePage
 - Animated TodoMaster logo with rotation effects
@@ -212,7 +212,7 @@ public/
 - Empty state messaging
 - Automatic refresh functionality
 
-## 🔧 Customization
+##  Customization
 
 ### Styling
 The application uses Tailwind CSS for styling:
@@ -243,7 +243,7 @@ const welcomeSteps = [
 ];
 ```
 
-## 🚀 Production Deployment
+##  Production Deployment
 
 ### Build Optimization
 ```bash
@@ -266,15 +266,15 @@ docker build -t todomaster-frontend:prod .
 # - Static asset caching
 ```
 
-## 🔍 Browser Support
+## Browser Support
 
-- ✅ Chrome (latest)
-- ✅ Firefox (latest)  
-- ✅ Safari (latest)
-- ✅ Edge (latest)
-- ✅ Mobile browsers (iOS Safari, Chrome Mobile)
+-  Chrome (latest)
+-  Firefox (latest)  
+-  Safari (latest)
+-  Edge (latest)
+-  Mobile browsers (iOS Safari, Chrome Mobile)
 
-## 📚 Technologies Used
+##  Technologies Used
 
 - **React 18** - Frontend framework
 - **Tailwind CSS** - Utility-first CSS framework
@@ -285,7 +285,7 @@ docker build -t todomaster-frontend:prod .
 - **Docker** - Containerization
 - **Nginx** - Production web server
 
-## 🤝 Contributing
+##  Contributing
 
 1. Fork the repository
 2. Create a feature branch: `git checkout -b feature/amazing-feature`
@@ -293,11 +293,11 @@ docker build -t todomaster-frontend:prod .
 4. Push to branch: `git push origin feature/amazing-feature`
 5. Open a Pull Request
 
-## 📄 License
+##  License
 
 This project is licensed under the MIT License.
 
-## 📞 Support
+##  Support
 
 - **Issues**: [GitHub Issues](https://github.com/lahiruimesh/todo-frontend/issues)
 - **Live Demo**: [TodoMaster App](http://localhost:3000)
@@ -305,7 +305,7 @@ This project is licensed under the MIT License.
 
 ---
 
-**TodoMaster Frontend** - Built with ❤️ using React and Docker
+
 
 ### Code Splitting
 

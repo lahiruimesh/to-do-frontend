@@ -2,10 +2,13 @@
 services:
   # Frontend React App
   frontend:
-    image: lahiruimesh/todomasterfrontend:v1.0.0
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: todomaster-frontend-local:latest
     container_name: todo-frontend
     environment:
-      REACT_APP_API_URL: http://localhost:5000/api
+      REACT_APP_API_URL: /api
     ports:
       - "80:80"
     networks:
