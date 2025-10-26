@@ -244,19 +244,6 @@ const TodoItem = ({ todo, onToggle, onUpdate, onDelete, isLoading }) => {
                 <FiEdit2 size={16} />
               </button>
               
-              <button 
-                onClick={handleToggle}
-                disabled={isLoading}
-                className="px-4 py-2.5 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 
-                           text-white text-sm font-semibold rounded-xl shadow-lg hover:shadow-xl 
-                           transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-400/50
-                           disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 
-                           transform hover:scale-105 hover:-translate-y-0.5"
-                title="Mark as completed"
-              >
-                <FiCheck size={14} />
-                Done
-              </button>
               
               <button 
                 onClick={handleDelete}
@@ -268,6 +255,21 @@ const TodoItem = ({ todo, onToggle, onUpdate, onDelete, isLoading }) => {
               >
                 <FiTrash2 size={16} />
               </button>
+
+              <button 
+                onClick={handleToggle}
+                disabled={isLoading}
+                className="px-4 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-600
+                           text-white text-sm font-semibold rounded-xl shadow-lg hover:shadow-xl 
+                           transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-400/50
+                           disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 
+                           transform hover:scale-105 hover:-translate-y-0.5"
+                title="Mark as completed"
+              >
+                <FiCheck size={14} />
+                Done
+              </button>
+              
             </div>
           </div>
         </div>

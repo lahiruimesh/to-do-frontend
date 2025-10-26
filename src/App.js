@@ -156,8 +156,12 @@ function App() {
           <div className="card p-8 mb-8">
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
               <div className="flex items-center gap-4">
-                <div className="p-3 bg-blue-100 rounded-2xl">
-                  <FiZap className="text-2xl text-blue-600" />
+                <div className="p-2 bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl shadow-lg">
+                  <img 
+                    src="/todoMaster.png" 
+                    alt="TodoMaster Logo" 
+                    className="w-12 h-12 object-contain"
+                  />
                 </div>
                 <div>
                   <h1 className="text-4xl lg:text-5xl font-bold text-gray-800 mb-2">

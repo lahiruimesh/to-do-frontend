@@ -45,7 +45,7 @@ const WelcomePage = ({ onComplete }) => {
       {/* Main content */}
       <div className="relative z-10 text-center max-w-2xl mx-auto">
         {/* App Icon */}
-        <div className="mb-8 relative">
+        <div className="mt-12 mb-8 relative">
           <div className="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-br from-blue-600 to-purple-600 rounded-3xl shadow-2xl shadow-blue-500/25 transform rotate-3 hover:rotate-0 transition-transform duration-500">
             <FiZap className="text-3xl text-white" />
           </div>
