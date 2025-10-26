@@ -1,0 +1,20 @@
+
+services:
+  # Frontend React App
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: todo-frontend
+    environment:
+      REACT_APP_API_URL: http://localhost:5000/api
+    ports:
+      - "80:80"
+    networks:
+      - todo-network
+    restart: unless-stopped
+
+networks:
+  todo-network:
+    driver: bridge
+    external: true
